@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:57:33 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/16 18:36:07 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/16 18:51:45 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ int	init_fractal(t_fractal *fractal)
 		return (0);
 	fractal->mlx_win = mlx_new_window(fractal->mlx, WIDTH, HEIGHT, fractal->name);
 	if (fractal->mlx_win == NULL)
+	{
+		free(fractal->mlx);
 		return (0);
+	}
 	fractal->data.img = mlx_new_image(fractal->mlx, WIDTH, HEIGHT);
 	if (fractal->data.img == NULL)
 	{
+		free(fractal->mlx);
 		mlx_destroy_window(fractal->mlx, fractal->mlx_win);
 		return (0);
 	}
@@ -38,6 +42,11 @@ int	init_fractal(t_fractal *fractal)
 		, &(fractal->data.line_length), &(fractal->data.endian));
 	return (1);
 }
+
+/*
+ * mouse wheel -> zoom
+ * ESC -> quit
+ * */
 
 int	main(int argc, char **argv)
 {
@@ -50,5 +59,6 @@ int	main(int argc, char **argv)
 	if (init_fractal(&fractal) == 0)
 		return (init_error());
 	render_fractal(&fractal);
+
 	mlx_loop(fractal.mlx);
 }
