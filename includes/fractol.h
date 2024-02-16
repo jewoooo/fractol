@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:03 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/16 18:40:36 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/16 19:40:28 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_fractal
 	void	*mlx_win;
 	t_data	data;
 	char	*name;
+	double	zoom;
 }	t_fractal;
 
 typedef struct s_complex
@@ -56,5 +57,7 @@ void	calculate_mandelbrot(t_fractal *fractal, int x, int y);
 void	calculate_julia(t_fractal *fractal, int x, int y);
 void	render_fractal(t_fractal *fractal);
 double	map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+int		key_event(int keycode, t_fractal *fractal);
+int		mouse_event(int keycode, t_fractal *fractal);
 
 #endif

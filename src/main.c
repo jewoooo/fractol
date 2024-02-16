@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:57:33 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/16 18:51:45 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/16 19:45:22 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+void	init_data(t_fractal *fractal)
+{
+	fractal->zoom = 1.0;
 }
 
 int	init_fractal(t_fractal *fractal)
@@ -40,6 +45,7 @@ int	init_fractal(t_fractal *fractal)
 	}
 	fractal->data.addr = mlx_get_data_addr(fractal->data.img, &(fractal->data.bits_per_pixel)
 		, &(fractal->data.line_length), &(fractal->data.endian));
+	init_data(fractal);
 	return (1);
 }
 
@@ -59,6 +65,7 @@ int	main(int argc, char **argv)
 	if (init_fractal(&fractal) == 0)
 		return (init_error());
 	render_fractal(&fractal);
-
+	mlx_key_hook(fractal.mlx_win, key_event, &fractal);
+	mlx_mouse_hook(fractal.mlx_win, mouse_event, &fractal);
 	mlx_loop(fractal.mlx);
 }
