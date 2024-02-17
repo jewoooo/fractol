@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:03 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/16 19:40:28 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/17 14:10:28 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define WHITE 0x00FFFFFF
 # define JULIA_X -0.70176
 # define JULIA_Y -0.3842
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
+# define ESC 53
 
 typedef struct s_data
 {
@@ -40,6 +43,8 @@ typedef struct s_fractal
 	t_data	data;
 	char	*name;
 	double	zoom;
+	double	offset_x;
+	double	offset_y;
 }	t_fractal;
 
 typedef struct s_complex
@@ -58,6 +63,6 @@ void	calculate_julia(t_fractal *fractal, int x, int y);
 void	render_fractal(t_fractal *fractal);
 double	map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
 int		key_event(int keycode, t_fractal *fractal);
-int		mouse_event(int keycode, t_fractal *fractal);
+int		mouse_event(int button, int x, int y, t_fractal *fractal);
 
 #endif
