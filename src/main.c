@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:57:33 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/16 19:45:22 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/17 14:10:48 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void	init_data(t_fractal *fractal)
 {
 	fractal->zoom = 1.0;
+	fractal->offset_x = 0;
+	fractal->offset_y = 0;
 }
 
 int	init_fractal(t_fractal *fractal)

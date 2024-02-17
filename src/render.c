@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:13:27 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/16 19:43:42 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/17 14:13:25 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	calculate_mandelbrot(t_fractal *fractal, int x, int y)
 
 	z.x = 0;
 	z.y = 0;
-	c.x = map((double)x, -2, 2, 0, WIDTH) / fractal->zoom;
-	c.y = map((double)y, 2, -2, 0, HEIGHT) / fractal->zoom;
+	c.x = map((double)x, -2, 2, 0, WIDTH) * fractal->zoom + fractal->offset_x;
+	c.y = map((double)y, 2, -2, 0, HEIGHT) * fractal->zoom + fractal->offset_y;
 	i = 0;
 	while (i < ITER_MAX && (z.x * z.x + z.y * z.y <= 4))
 	{
