@@ -6,24 +6,70 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:02:37 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/16 19:09:41 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/19 12:27:08 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max)
+static int	find_dot(const char *s)
 {
-    return (unscaled_num - old_min) * (new_max - new_min) / (old_max - old_min) + new_min;
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == '.')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
-int	check_argv(t_fractal *fractal, char **argv)
+static int	init_flag(char *s)
 {
-	if (ft_strncmp(argv[1], "mandelbrot", 10) == 0
-		|| ft_strncmp(argv[1], "julia", 5) == 0)
+	int	flag;
+
+	flag = 0;
+	while ((*s >= 9 && *s <= 13) || *s == 32)
+		s++;
+	if (*s == '-')
 	{
-		fractal->name = argv[1];
-		return (1);
+		flag = 1;
+		s++;
 	}
-	return (0);
+	else if (*s == '+')
+		s++;
+	return (flag);
+}
+
+double	ft_atodbl(char *s)
+{
+	int		i;
+	int		flag;
+	int		digit;
+	double	res;
+
+	flag = init_flag(s);
+	i = -1;
+	res = 0;
+	while (s[++i] != '\0')
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			digit = s[i] - '0';
+			if (find_dot(s) == -1 || find_dot(s) > i)
+				res = res * 10 + (double)digit;
+			else
+				res = res + ((double)digit / pow(10, i - find_dot(s)));
+		}
+	}
+	if (flag == 1)
+		res *= (-1);
+	return (res);
+}
+
+double	map(double unscaled_num, double old_min, double old_max, double new_max)
+{
+	return ((unscaled_num - 0) * (old_max - old_min) / (new_max - 0) + old_min);
 }

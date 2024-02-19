@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:45:43 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/17 14:15:10 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:07:35 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int	key_event(int keycode, t_fractal *fractal)
 {
 	if (keycode == ESC)
 	{
-		mlx_destroy_image(fractal->mlx, fractal->data.img);
-		mlx_destroy_window(fractal->mlx, fractal->mlx_win);
-		free(fractal->mlx);
+		free_mlx(fractal);
 		exit(0);
 	}
 	render_fractal(fractal);
@@ -27,10 +25,12 @@ int	key_event(int keycode, t_fractal *fractal)
 
 int	mouse_event(int button, int x, int y, t_fractal *fractal)
 {
+	x *= 1;
+	y *= 1;
 	if (button == SCROLL_UP)
-		(fractal->zoom) *= 1.05;
+		fractal->zoom *= 1.2;
 	else if (button == SCROLL_DOWN)
-		(fractal->zoom) *= 0.95;
+		(fractal->zoom) *= 0.8;
 	render_fractal(fractal);
-	return (0);	
+	return (0);
 }

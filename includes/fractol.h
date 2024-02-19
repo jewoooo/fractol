@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:03 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/17 14:10:28 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/19 12:06:50 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
+# include <math.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+
+# include <stdio.h> // for test
 
 # define WIDTH 800
 # define HEIGHT 800
-# define ITER_MAX 1000
+# define ITER_MAX 42
+
 # define BLACK 0x00000000
 # define WHITE 0x00FFFFFF
-# define JULIA_X -0.70176
-# define JULIA_Y -0.3842
+# define RED 0x00FF0000
+# define GREEN 0x0000FF00
+# define BLUE 0x000000FF
+
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
 # define ESC 53
@@ -42,9 +51,9 @@ typedef struct s_fractal
 	void	*mlx_win;
 	t_data	data;
 	char	*name;
+	double	julia_x;
+	double	julia_y;
 	double	zoom;
-	double	offset_x;
-	double	offset_y;
 }	t_fractal;
 
 typedef struct s_complex
@@ -53,16 +62,26 @@ typedef struct s_complex
 	double	y;
 }	t_complex;
 
-int		init_fractal(t_fractal *fractal);
+int		init_fractal(t_fractal *f);
+int		init_julia(t_fractal *f, char **argv);
+
+int		free_mlx(t_fractal *f);
+int		argv_error(void);
+int		init_error(void);
+
+int		check_fractal(t_fractal *fractal, int argc, char **argv);
+int		check_argv(char **argv);
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		argv_error();
-int		init_error();
-int		check_argv(t_fractal *fractal, char **argv);
 void	calculate_mandelbrot(t_fractal *fractal, int x, int y);
 void	calculate_julia(t_fractal *fractal, int x, int y);
 void	render_fractal(t_fractal *fractal);
-double	map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+
 int		key_event(int keycode, t_fractal *fractal);
 int		mouse_event(int button, int x, int y, t_fractal *fractal);
+
+double	ft_atodbl(char *s);
+double	map(double unscaled_num, double old_min,
+			double old_max, double new_max);
 
 #endif

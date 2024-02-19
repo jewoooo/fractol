@@ -6,11 +6,19 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:13:27 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/17 14:13:25 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:07:53 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
 void	calculate_mandelbrot(t_fractal *fractal, int x, int y)
 {
@@ -22,8 +30,8 @@ void	calculate_mandelbrot(t_fractal *fractal, int x, int y)
 
 	z.x = 0;
 	z.y = 0;
-	c.x = map((double)x, -2, 2, 0, WIDTH) * fractal->zoom + fractal->offset_x;
-	c.y = map((double)y, 2, -2, 0, HEIGHT) * fractal->zoom + fractal->offset_y;
+	c.x = map((double)x, -2, 2, WIDTH) * fractal->zoom;
+	c.y = map((double)y, 2, -2, HEIGHT) * fractal->zoom;
 	i = 0;
 	while (i < ITER_MAX && (z.x * z.x + z.y * z.y <= 4))
 	{
@@ -36,7 +44,7 @@ void	calculate_mandelbrot(t_fractal *fractal, int x, int y)
 		my_mlx_pixel_put(&(fractal->data), x, y, BLACK);
 	else
 	{
-		color = map(i, BLACK, WHITE, 0, ITER_MAX);
+		color = map(i, BLACK, WHITE, ITER_MAX);
 		my_mlx_pixel_put(&(fractal->data), x, y, color);
 	}
 }
@@ -49,10 +57,10 @@ void	calculate_julia(t_fractal *fractal, int x, int y)
 	int			i;
 	int			color;
 
-	z.x = map((double)x, -2, 2, 0, WIDTH);
-	z.y = map((double)y, 2, -2, 0, HEIGHT);
-	c.x = JULIA_X;
-	c.y = JULIA_Y;
+	z.x = map((double)x, -2, 2, WIDTH) * fractal->zoom;
+	z.y = map((double)y, 2, -2, HEIGHT) * fractal->zoom;
+	c.x = fractal->julia_x;
+	c.y = fractal->julia_y;
 	i = 0;
 	while (i < ITER_MAX && (z.x * z.x + z.y * z.y <= 4))
 	{
@@ -65,7 +73,7 @@ void	calculate_julia(t_fractal *fractal, int x, int y)
 		my_mlx_pixel_put(&(fractal->data), x, y, WHITE);
 	else
 	{
-		color = map(i, BLACK, WHITE, 0, ITER_MAX);
+		color = map(i, BLACK, WHITE, ITER_MAX);
 		my_mlx_pixel_put(&(fractal->data), x, y, color);
 	}
 }
@@ -89,5 +97,6 @@ void	render_fractal(t_fractal *fractal)
 		}
 		x++;
 	}
-	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win, fractal->data.img, 0, 0);
+	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win,
+		fractal->data.img, 0, 0);
 }
