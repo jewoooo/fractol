@@ -22,22 +22,22 @@ all : $(NAME)
 $(NAME) : make_mandatory
 
 make_mandatory : $(OBJS)
-	@ $(MAKE_CUR) $(MLX_DIR) > /dev/null
-	@ $(MAKE_CUR) $(LIBFT_DIR) bonus > /dev/null
+	$(MAKE_CUR) $(MLX_DIR)
+	$(MAKE_CUR) $(LIBFT_DIR) bonus
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) -framework OpenGL -framework AppKit -o $(NAME)
-	touch make_mandatory
+	@ touch make_mandatory
 
 %.o : %.c
-	$(CC) $(CFLAGS) -Imlx -c $< -o $@
+	@ $(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean :
-	@ $(MAKE_CUR) $(MLX_DIR) clean > /dev/null
-	@ $(MAKE_CUR) $(LIBFT_DIR) clean > /dev/null
+	$(MAKE_CUR) $(MLX_DIR) clean
+	$(MAKE_CUR) $(LIBFT_DIR) clean
 	$(RM) $(OBJS)
-	$(RM) make_mandatory
+	@ $(RM) make_mandatory
 
 fclean : clean
-	@ $(MAKE_CUR) $(LIBFT_DIR) fclean > /dev/null
+	$(MAKE_CUR) $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 
 re : fclean all

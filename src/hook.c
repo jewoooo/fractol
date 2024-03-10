@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:45:43 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/19 11:07:35 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/03/11 00:23:15 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	key_event(int keycode, t_fractal *fractal)
 		free_mlx(fractal);
 		exit(0);
 	}
-	render_fractal(fractal);
 	return (0);
 }
 

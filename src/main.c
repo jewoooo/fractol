@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:57:33 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/19 12:23:16 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/03/11 00:24:26 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(fractal.mlx_win, key_event, &fractal);
 	mlx_mouse_hook(fractal.mlx_win, mouse_event, &fractal);
 	mlx_loop(fractal.mlx);
+	return (0);
 }

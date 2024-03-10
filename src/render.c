@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:13:27 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/19 11:07:53 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/03/11 00:09:13 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	calculate_mandelbrot(t_fractal *fractal, int x, int y)
 
 	z.x = 0;
 	z.y = 0;
-	c.x = map((double)x, -2, 2, WIDTH) * fractal->zoom;
-	c.y = map((double)y, 2, -2, HEIGHT) * fractal->zoom;
+	c.x = map((double)x, WIDTH, -2, 2) * fractal->zoom;
+	c.y = map((double)y, HEIGHT, 2, -2) * fractal->zoom;
 	i = 0;
 	while (i < ITER_MAX && (z.x * z.x + z.y * z.y <= 4))
 	{
@@ -44,7 +44,7 @@ void	calculate_mandelbrot(t_fractal *fractal, int x, int y)
 		my_mlx_pixel_put(&(fractal->data), x, y, BLACK);
 	else
 	{
-		color = map(i, BLACK, WHITE, ITER_MAX);
+		color = map(i, ITER_MAX, BLACK, WHITE);
 		my_mlx_pixel_put(&(fractal->data), x, y, color);
 	}
 }
@@ -57,8 +57,8 @@ void	calculate_julia(t_fractal *fractal, int x, int y)
 	int			i;
 	int			color;
 
-	z.x = map((double)x, -2, 2, WIDTH) * fractal->zoom;
-	z.y = map((double)y, 2, -2, HEIGHT) * fractal->zoom;
+	z.x = map((double)x, WIDTH, -2, 2) * fractal->zoom;
+	z.y = map((double)y, HEIGHT, 2, -2) * fractal->zoom;
 	c.x = fractal->julia_x;
 	c.y = fractal->julia_y;
 	i = 0;
@@ -73,7 +73,7 @@ void	calculate_julia(t_fractal *fractal, int x, int y)
 		my_mlx_pixel_put(&(fractal->data), x, y, WHITE);
 	else
 	{
-		color = map(i, BLACK, WHITE, ITER_MAX);
+		color = map(i, ITER_MAX, BLACK, WHITE);
 		my_mlx_pixel_put(&(fractal->data), x, y, color);
 	}
 }

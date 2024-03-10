@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:02:37 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/19 12:27:08 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/03/10 23:59:17 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,12 @@ double	ft_atodbl(char *s)
 	return (res);
 }
 
-double	map(double unscaled_num, double old_min, double old_max, double new_max)
+double	map(double unscaled_num, double old_max, double new_min, double new_max)
 {
-	return ((unscaled_num - 0) * (old_max - old_min) / (new_max - 0) + old_min);
+	double	old_ratio;
+	double	new_num;
+
+	old_ratio = (unscaled_num - 0) / (old_max - 0);
+	new_num = old_ratio * (new_max - new_min) + new_min;
+	return (new_num);
 }
