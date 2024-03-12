@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:20:29 by jewlee            #+#    #+#             */
-/*   Updated: 2024/02/19 11:07:09 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:02:59 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	free_mlx(t_fractal *f)
 {
 	mlx_destroy_image(f->mlx, f->data.img);
 	mlx_destroy_window(f->mlx, f->mlx_win);
-	free(f->mlx);
+	exit(1);
 	return (0);
 }
 

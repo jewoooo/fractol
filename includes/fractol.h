@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:03 by jewlee            #+#    #+#             */
-/*   Updated: 2024/03/11 00:26:48 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:04:02 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define ITER_MAX 42
+# define ITER_MAX 1000
 
 # define BLACK 0x00000000
 # define WHITE 0x00FFFFFF
