@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:43:44 by jewlee            #+#    #+#             */
-/*   Updated: 2024/03/11 00:16:17 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/03/22 09:56:50 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ int	init_fractal(t_fractal *f)
 		return (0);
 	f->mlx_win = mlx_new_window(f->mlx, WIDTH, HEIGHT, f->name);
 	if (f->mlx_win == NULL)
-	{
-		free(f->mlx);
 		return (0);
-	}
 	f->data.img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	if (f->data.img == NULL)
 	{
-		free(f->mlx);
 		mlx_destroy_window(f->mlx, f->mlx_win);
 		return (0);
 	}
 	f->data.addr = mlx_get_data_addr(f->data.img, &(f->data.bits_per_pixel),
 			&(f->data.line_length), &(f->data.endian));
 	if (f->data.addr == NULL)
-		return (free_mlx(f));
+	{
+		mlx_destroy_image(f->mlx, f->data.img);
+		mlx_destroy_window(f->mlx, f->mlx_win);
+		return (0);
+	}
 	f->zoom = 1;
 	return (1);
 }

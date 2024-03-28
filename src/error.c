@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:20:29 by jewlee            #+#    #+#             */
-/*   Updated: 2024/03/12 14:02:59 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/03/24 00:18:46 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ int	argv_error(void)
 	ft_putendl_fd("Please write like this.", 2);
 	ft_putendl_fd("./fractol mandelbrot", 2);
 	ft_putendl_fd("./fractol julia <x> <y>", 2);
+	exit(1);
 	return (1);
 }
 
 int	init_error(void)
 {
 	ft_putendl_fd("Init Error.", 2);
+	exit(1);
 	return (1);
 }
