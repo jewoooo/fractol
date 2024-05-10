@@ -6,7 +6,7 @@
 /*   By: jewlee <jewlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:45:43 by jewlee            #+#    #+#             */
-/*   Updated: 2024/03/22 09:58:46 by jewlee           ###   ########.fr       */
+/*   Updated: 2024/05/10 20:12:32 by jewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	key_event(int keycode, t_fractal *fractal)
 
 int	mouse_event(int button, int x, int y, t_fractal *fractal)
 {
-	x *= 1;
-	y *= 1;
+	(void)x;
+	(void)y;
 	if (button == SCROLL_UP)
 		fractal->zoom *= 1.2;
 	else if (button == SCROLL_DOWN)
